@@ -272,8 +272,6 @@ ServiceFabricBackup/
 *.bim_*.settings
 *.rptproj.rsuser
 *- [Bb]ackup.rdl
-*- [Bb]ackup ([0-9]).rdl
-*- [Bb]ackup ([0-9][0-9]).rdl
 
 # Microsoft Fakes
 FakesAssemblies/
@@ -361,3 +359,16 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Banco de dados SQLite
+*.db
+
+# Arquivos locais de configuração (credenciais/senhas)
+appsettings.Development.json
+
+# Dump de backup da migration ou snapshot (caso existam)
+*.bak
+*.sql
+
+# Arquivo específico do projeto (PowerGuard.csproj.user)
+*.csproj.user

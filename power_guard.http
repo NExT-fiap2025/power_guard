@@ -1,6 +1,0 @@
-@power_guard_HostAddress = http://localhost:5085
-
-GET {{power_guard_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
