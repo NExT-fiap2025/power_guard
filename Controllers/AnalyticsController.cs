@@ -16,13 +16,22 @@ public class AnalyticsController : ControllerBase
         _db = db;
     }
 
+    [HttpGet("health")]
+    public IActionResult HealthCheck()
+    {
+        return Ok(new { status = "OK", timestamp = DateTime.Now });
+    }
+
     [HttpPost("event")]
     public async Task<IActionResult> PostEvent([FromBody] EnergyEvent e)
     {
         try
         {
-            if (string.IsNullOrWhiteSpace(e.Location) || e.DurationMinutes <= 0)
-                return BadRequest("Dados inv�lidos.");
+            if (string.IsNullOrWhiteSpace(e.Location) || e.DurationMinutes <= 0 || string.IsNullOrWhiteSpace(e.Cause))
+                return BadRequest("Dados inválidos.");
+
+            if (e.Timestamp > DateTime.Now)
+                return BadRequest("Data futura não é permitida.");
 
             _db.EnergyEvents.Add(e);
             await _db.SaveChangesAsync();
@@ -43,6 +52,34 @@ public class AnalyticsController : ControllerBase
             .GroupBy(e => e.Location)
             .Select(g => new { Location = g.Key, Count = g.Count() });
 
-        return Ok(grouped);
+        return Ok(new
+        {
+            totalEvents = _db.EnergyEvents.Count(),
+            eventsByLocation = grouped
+        });
+    }
+
+    [HttpGet("events")]
+    public IActionResult GetAllEvents()
+    {
+        var events = _db.EnergyEvents
+            .OrderByDescending(e => e.Timestamp)
+            .ToList();
+
+        return Ok(events);
+    }
+
+    [HttpPost("recommendations")]
+    public IActionResult SimulateRecommendation([FromBody] EnergyEvent e)
+    {
+        try
+        {
+            var recommendation = RulesEngine.GetRecommendation(e);
+            return Ok(new { recommendation });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Erro ao processar recomendação: {ex.Message}");
+        }
     }
 }
