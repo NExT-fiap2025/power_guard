@@ -1,5 +1,9 @@
 # ⚡ PowerGuard – Microserviço de Análise de Falhas Elétricas
 
+```bash
+rm power_guard.sln
+```
+
 ### Projeto para a disciplina de **C# Software Development – GS 2025 (FIAP)**
 
 | nome          | rm     |
