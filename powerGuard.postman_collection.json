@@ -1,0 +1,106 @@
+{
+	"info": {
+		"_postman_id": "45f81648-80a1-46ff-9bfd-390618f21a53",
+		"name": "powerGuard",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "39183344"
+	},
+	"item": [
+		{
+			"name": "analyss",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"location\":\"Cetro\",\"timestamp\":\"2025-06-06T15:00:00\",\"durationMinutes\":140,\"cause\":\"Chuva forte\",\"damage\":\"Transformador queimado\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5085/api/analytics/event"
+			},
+			"response": []
+		},
+		{
+			"name": "summary",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:5085/api/analytics/summary"
+			},
+			"response": []
+		},
+		{
+			"name": "events",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:5085/api/analytics/events"
+			},
+			"response": []
+		},
+		{
+			"name": "recommendations",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"location\": \"Jardins\",\n  \"timestamp\": \"2025-06-06T16:00:00\",\n  \"durationMinutes\": 100,\n  \"cause\": \"Vento forte\",\n  \"damage\": \"Poste caído\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5085/api/analytics/recommendations"
+			},
+			"response": []
+		},
+		{
+			"name": "event",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"location\": \"\",\n  \"timestamp\": \"2025-06-10T12:00:00\",\n  \"durationMinutes\": -5,\n  \"cause\": \"\",\n  \"damage\": \"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5085/api/analytics/event"
+			},
+			"response": []
+		},
+		{
+			"name": "avg-duration",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:5085/api/analytics/avg-duration"
+			},
+			"response": []
+		}
+	]
+}
