@@ -102,6 +102,7 @@ Desenvolver um **microserviço RESTful** com:
 | 3   | Listagem completa de eventos               | `GET /api/analytics/events`             |
 | 4   | Geração de recomendações (sem salvar)      | `POST /api/analytics/recommendations`   |
 | 5   | Validação de entrada e tratamento de erros | Integrado via `try/catch` no controller |
+| 6   | Análise de duração média por localidade    | GET /api/analytics/avg-duration         |
 
 ---
 

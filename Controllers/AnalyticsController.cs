@@ -21,6 +21,21 @@ public class AnalyticsController : ControllerBase
     {
         return Ok(new { status = "OK", timestamp = DateTime.Now });
     }
+    
+    [HttpGet("avg-duration")]
+    public IActionResult GetAverageDurationByLocation()
+    {
+        var result = _db.EnergyEvents
+            .GroupBy(e => e.Location)
+            .Select(g => new
+            {
+                location = g.Key,
+                averageDuration = Math.Round(g.Average(e => e.DurationMinutes), 2)
+            })
+            .ToList();
+
+        return Ok(result);
+    }
 
     [HttpPost("event")]
     public async Task<IActionResult> PostEvent([FromBody] EnergyEvent e)
